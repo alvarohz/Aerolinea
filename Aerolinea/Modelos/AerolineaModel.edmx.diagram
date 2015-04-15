@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="15f52435ec604258912d1c036d19d765" Name="Diagram1">
+        <EntityTypeShape EntityType="aerolineaModel.aeropuertos" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.aviones" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.paises" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.reservaciones" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.roles" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.usuarios" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aerolineaModel.vuelos" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="aerolineaModel.FK__aeropuert__idpai__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__vuelos__iddestin__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__vuelos__idorigen__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__vuelos__idavion__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__usuarios__idpais__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__reservaci__idusu__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__reservaci__idvue__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="aerolineaModel.FK__usuarios__idrol__1A14E395" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aerolineaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aeropuertos">
+    <Key>
+      <PropertyRef Name="idaeropuerto" />
+    </Key>
+    <Property Name="idaeropuerto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aeropuerto" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="idpais" Type="int" Nullable="false" />
+    <Property Name="ciudad" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aviones">
+    <Key>
+      <PropertyRef Name="idavion" />
+    </Key>
+    <Property Name="idavion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="capacidad" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="70" Nullable="false" />
+  </EntityType>
+  <EntityType Name="paises">
+    <Key>
+      <PropertyRef Name="idpais" />
+    </Key>
+    <Property Name="idpais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pais" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservaciones">
+    <Key>
+      <PropertyRef Name="idreservacion" />
+    </Key>
+    <Property Name="idreservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idusuario" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="idvuelo" Type="int" Nullable="false" />
+    <Property Name="nboletos" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="roles">
+    <Key>
+      <PropertyRef Name="idrol" />
+    </Key>
+    <Property Name="idrol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rol" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="idusuario" />
+    </Key>
+    <Property Name="idusuario" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="nombres" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="apellidos" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="20" />
+    <Property Name="clave" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="idpais" Type="int" Nullable="false" />
+    <Property Name="idrol" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vuelos">
+    <Key>
+      <PropertyRef Name="idvuelo" />
+    </Key>
+    <Property Name="idvuelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idorigen" Type="int" Nullable="false" />
+    <Property Name="iddestino" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="estado" Type="bit" />
+    <Property Name="idavion" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__aeropuert__idpai__145C0A3F">
+    <End Role="paises" Type="Self.paises" Multiplicity="1" />
+    <End Role="aeropuertos" Type="Self.aeropuertos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paises">
+        <PropertyRef Name="idpais" />
+      </Principal>
+      <Dependent Role="aeropuertos">
+        <PropertyRef Name="idpais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservaci__idusu__239E4DCF">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="reservaciones" Type="Self.reservaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="idusuario" />
+      </Principal>
+      <Dependent Role="reservaciones">
+        <PropertyRef Name="idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservaci__idvue__22AA2996">
+    <End Role="vuelos" Type="Self.vuelos" Multiplicity="1" />
+    <End Role="reservaciones" Type="Self.reservaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vuelos">
+        <PropertyRef Name="idvuelo" />
+      </Principal>
+      <Dependent Role="reservaciones">
+        <PropertyRef Name="idvuelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuarios__idpais__1B0907CE">
+    <End Role="paises" Type="Self.paises" Multiplicity="1" />
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paises">
+        <PropertyRef Name="idpais" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="idpais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuarios__idrol__1A14E395">
+    <End Role="roles" Type="Self.roles" Multiplicity="1" />
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="idrol" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="idrol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vuelos__idavion__1DE57479">
+    <End Role="aviones" Type="Self.aviones" Multiplicity="1" />
+    <End Role="vuelos" Type="Self.vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aviones">
+        <PropertyRef Name="idavion" />
+      </Principal>
+      <Dependent Role="vuelos">
+        <PropertyRef Name="idavion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vuelos__iddestin__1FCDBCEB">
+    <End Role="aeropuertos" Type="Self.aeropuertos" Multiplicity="1" />
+    <End Role="vuelos" Type="Self.vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aeropuertos">
+        <PropertyRef Name="idaeropuerto" />
+      </Principal>
+      <Dependent Role="vuelos">
+        <PropertyRef Name="iddestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vuelos__idorigen__1ED998B2">
+    <End Role="aeropuertos" Type="Self.aeropuertos" Multiplicity="1" />
+    <End Role="vuelos" Type="Self.vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aeropuertos">
+        <PropertyRef Name="idaeropuerto" />
+      </Principal>
+      <Dependent Role="vuelos">
+        <PropertyRef Name="idorigen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="aerolineaModelStoreContainer">
+    <EntitySet Name="aeropuertos" EntityType="Self.aeropuertos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aviones" EntityType="Self.aviones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="paises" EntityType="Self.paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservaciones" EntityType="Self.reservaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vuelos" EntityType="Self.vuelos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__aeropuert__idpai__145C0A3F" Association="Self.FK__aeropuert__idpai__145C0A3F">
+      <End Role="paises" EntitySet="paises" />
+      <End Role="aeropuertos" EntitySet="aeropuertos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservaci__idusu__239E4DCF" Association="Self.FK__reservaci__idusu__239E4DCF">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="reservaciones" EntitySet="reservaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservaci__idvue__22AA2996" Association="Self.FK__reservaci__idvue__22AA2996">
+      <End Role="vuelos" EntitySet="vuelos" />
+      <End Role="reservaciones" EntitySet="reservaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuarios__idpais__1B0907CE" Association="Self.FK__usuarios__idpais__1B0907CE">
+      <End Role="paises" EntitySet="paises" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuarios__idrol__1A14E395" Association="Self.FK__usuarios__idrol__1A14E395">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vuelos__idavion__1DE57479" Association="Self.FK__vuelos__idavion__1DE57479">
+      <End Role="aviones" EntitySet="aviones" />
+      <End Role="vuelos" EntitySet="vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vuelos__iddestin__1FCDBCEB" Association="Self.FK__vuelos__iddestin__1FCDBCEB">
+      <End Role="aeropuertos" EntitySet="aeropuertos" />
+      <End Role="vuelos" EntitySet="vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vuelos__idorigen__1ED998B2" Association="Self.FK__vuelos__idorigen__1ED998B2">
+      <End Role="aeropuertos" EntitySet="aeropuertos" />
+      <End Role="vuelos" EntitySet="vuelos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
